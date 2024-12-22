@@ -5,12 +5,8 @@ using System;
 using System.Windows.Media.Media3D;
 
 namespace NINA.Point3d.Helpers {
-
     public static class Position {
-
         public static Vector3D TelescopeInfoToXYZ(TelescopeInfo telescopeInfo, bool useSideOfPier) {
-            Logger.Debug($"Use side of pier={useSideOfPier}");
-
             var xOffset = -90;
             var yOffset = -90;
 
@@ -25,7 +21,7 @@ namespace NINA.Point3d.Helpers {
                 Logger.Debug("Using west coordinates");
             }
             adjustedDec = telescopeInfo.SiteLatitude > 0 ? adjustedDec : -adjustedDec;
-            Logger.Debug($"HourAngle={adjustedHourAngleDeg} RA={telescopeInfo.RightAscension} adjustedDec={adjustedDec} elevation={elevation} Use west?={sopWest} Telescope SOP={telescopeInfo.SideOfPier}");
+            Logger.Trace($"UseSideOfPier={useSideOfPier} HourAngle={adjustedHourAngleDeg} RA={telescopeInfo.RightAscension} adjustedDec={adjustedDec} elevation={elevation} Use west?={sopWest} Telescope SOP={telescopeInfo.SideOfPier}");
 
             return new Vector3D(adjustedDec + xOffset, adjustedHourAngleDeg + yOffset, elevation);
         }
@@ -38,7 +34,6 @@ namespace NINA.Point3d.Helpers {
             }
 
             var hourAngleDeg = GetHourAngleDegree(telescopeInfo);
-
             if (hourAngleDeg < 180) {
                 return false;
             }
@@ -48,8 +43,7 @@ namespace NINA.Point3d.Helpers {
 
         private static double GetHourAngleDegree(TelescopeInfo telescopeInfo) {
             var hourAngleDeg = (telescopeInfo.SiderealTime - telescopeInfo.RightAscension) * 15.0;
-
-            while (hourAngleDeg < 0) {
+            while(hourAngleDeg < 0) {
                 hourAngleDeg += 360.0;
             }
 

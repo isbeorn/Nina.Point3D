@@ -1,6 +1,8 @@
 ﻿# Point3D
 
-!!! Very early preview/beta version.  Using during imaging that you care about is not reccomended. !!!
+## Issues / Requests
+
+Please submit issues or requests here: [New Github Issue](https://github.com/FlyingKiwis/Nina.Point3D/issues/new/choose)
 
 ## About
 
